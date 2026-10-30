@@ -4,12 +4,11 @@
  */
 package view;
 
-/**
- *
- * @author 1104695
- */
+import model.AgendaModel;
+import javax.swing.JOptionPane;
+
 public class TelaAgenda extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaAgenda.class.getName());
 
     /**
@@ -17,6 +16,7 @@ public class TelaAgenda extends javax.swing.JFrame {
      */
     public TelaAgenda() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -123,6 +123,7 @@ public class TelaAgenda extends javax.swing.JFrame {
         btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(255, 255, 255));
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(this::btnCadastrarActionPerformed);
         pnlFormulario.add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         btnAlterar.setBackground(new java.awt.Color(0, 51, 255));
@@ -182,6 +183,23 @@ public class TelaAgenda extends javax.swing.JFrame {
         txtEmail.setText("");
         txtTelefone.setText("");
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        String nome = txtNome.getText().trim();
+        String email = txtEmail.getText().trim();
+        String telefone = txtTelefone.getText().trim();
+        AgendaModel agenda = new AgendaModel();
+        agenda.inserir(nome, email, telefone);
+        JOptionPane.showMessageDialog(
+                null,
+                "Cadastro realizado com sucesso!",
+                "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+        //Chama para limpar campos
+        //LimparCampos();
+
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments

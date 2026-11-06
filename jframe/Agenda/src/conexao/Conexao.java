@@ -6,10 +6,11 @@ package conexao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+
 public class Conexao {
-    
+
     public static Connection conectar() {
-    try {
+        try {
             String url = "jdbc:sqlite:banco/bancoAgenda.db";
             Connection conexao = DriverManager.getConnection(url);
 
@@ -20,5 +21,5 @@ public class Conexao {
             System.out.println("Erro: " + e.getMessage());
             return null;
         }
-}
+    }
 }

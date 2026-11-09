@@ -4,6 +4,14 @@
  */
 package view;
 
+import model.CadastroModel;
+import javax.swing.JTable;
+import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+
+
 /**
  *
  * @author 1104695
@@ -17,6 +25,35 @@ public class TelaCadastro extends javax.swing.JFrame {
      */
     public TelaCadastro() {
         initComponents();
+        //Customizando a JTable
+        tableCadastro.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);//desliga o ajuste automático
+        tableCadastro.getColumnModel().getColumn(0).setPreferredWidth(20);//ID
+        tableCadastro.getColumnModel().getColumn(1).setPreferredWidth(200);//Nome
+        tableCadastro.getColumnModel().getColumn(2).setPreferredWidth(200);//Categoria
+        tableCadastro.getColumnModel().getColumn(3).setPreferredWidth(80);//Preço
+        tableCadastro.getColumnModel().getColumn(4).setPreferredWidth(80);//Estoque
+        //Carregando a tabela ao iniciar
+        //carregarTabela();
+    }
+    
+    private void carregarTabela() {
+        DefaultTableModel modelo = (DefaultTableModel) tableCadastro.getModel();//modelo da tabela
+        modelo.setRowCount(0); // apaga as linhas atuais
+        CadastroModel cadastro = new CadastroModel();
+        ArrayList<Object[]> linhas = cadastro.listarTodos(); //pede ao model
+        for (Object[] linha : linhas) { // adiciona cada linha
+            modelo.addRow(linha);
+        }
+
+    }
+    
+    private void LimparCampos() {
+        txtID.setText("");
+        txtNome.setText("");
+        txtCategoria.setText("");
+        txtPreco.setText("");
+        txtEstoque.setText("");
+
     }
 
     /**
@@ -28,16 +65,33 @@ public class TelaCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSeparator1 = new javax.swing.JSeparator();
         Cabecalho = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
+        lblEstoqueCabecalho = new javax.swing.JLabel();
         CabecalhoRotape = new javax.swing.JPanel();
         Principal = new javax.swing.JPanel();
         Dados = new javax.swing.JPanel();
         lblID = new javax.swing.JLabel();
+        txtID = new javax.swing.JTextField();
+        lblNome = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        lblCategoria = new javax.swing.JLabel();
+        txtCategoria = new javax.swing.JTextField();
+        lblPreco = new javax.swing.JLabel();
+        txtPreco = new javax.swing.JTextField();
+        lblEstoque = new javax.swing.JLabel();
+        txtEstoque = new javax.swing.JTextField();
+        btnCadastrar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnLimpar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableCadastro = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 480));
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(900, 460));
+        setPreferredSize(new java.awt.Dimension(900, 460));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Cabecalho.setBackground(new java.awt.Color(0, 51, 255));
@@ -47,25 +101,122 @@ public class TelaCadastro extends javax.swing.JFrame {
         Titulo.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
         Titulo.setForeground(new java.awt.Color(255, 255, 255));
         Titulo.setText("Cadastro de Produtos");
-        Cabecalho.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+        Cabecalho.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        getContentPane().add(Cabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 70));
+        lblEstoqueCabecalho.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        lblEstoqueCabecalho.setText("Estoque da Loja");
+        Cabecalho.add(lblEstoqueCabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 30, 90, -1));
+
+        getContentPane().add(Cabecalho, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 70));
 
         CabecalhoRotape.setBackground(new java.awt.Color(255, 153, 51));
         CabecalhoRotape.setPreferredSize(new java.awt.Dimension(700, 480));
         CabecalhoRotape.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(CabecalhoRotape, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 690, 10));
+        getContentPane().add(CabecalhoRotape, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 900, 10));
 
         Principal.setBackground(new java.awt.Color(255, 255, 255));
 
         Dados.setBackground(new java.awt.Color(255, 255, 255));
-        Dados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14), new java.awt.Color(0, 51, 255))); // NOI18N
+        Dados.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(0, 51, 255))); // NOI18N
         Dados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblID.setForeground(new java.awt.Color(51, 51, 51));
         lblID.setText("ID");
         Dados.add(lblID, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        txtID.setBackground(new java.awt.Color(255, 255, 255));
+        txtID.setForeground(new java.awt.Color(0, 0, 0));
+        Dados.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+
+        lblNome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(51, 51, 51));
+        lblNome.setText("Nome");
+        Dados.add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
+
+        txtNome.setBackground(new java.awt.Color(255, 255, 255));
+        txtNome.setForeground(new java.awt.Color(0, 0, 0));
+        Dados.add(txtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 210, -1));
+
+        lblCategoria.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblCategoria.setForeground(new java.awt.Color(51, 51, 51));
+        lblCategoria.setText("Categoria");
+        Dados.add(lblCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+
+        txtCategoria.setBackground(new java.awt.Color(255, 255, 255));
+        txtCategoria.setForeground(new java.awt.Color(0, 0, 0));
+        Dados.add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 210, -1));
+
+        lblPreco.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPreco.setForeground(new java.awt.Color(51, 51, 51));
+        lblPreco.setText("Preço(R$)");
+        Dados.add(lblPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+
+        txtPreco.setBackground(new java.awt.Color(255, 255, 255));
+        txtPreco.setForeground(new java.awt.Color(0, 0, 0));
+        Dados.add(txtPreco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 100, -1));
+
+        lblEstoque.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblEstoque.setForeground(new java.awt.Color(51, 51, 51));
+        lblEstoque.setText("Estoque");
+        Dados.add(lblEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 60, -1));
+
+        txtEstoque.setBackground(new java.awt.Color(255, 255, 255));
+        txtEstoque.setForeground(new java.awt.Color(0, 0, 0));
+        Dados.add(txtEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 100, -1));
+
+        btnCadastrar.setBackground(new java.awt.Color(0, 0, 255));
+        btnCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(this::btnCadastrarActionPerformed);
+        Dados.add(btnCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 100, -1));
+
+        btnAlterar.setBackground(new java.awt.Color(0, 0, 255));
+        btnAlterar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(this::btnAlterarActionPerformed);
+        Dados.add(btnAlterar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 100, -1));
+
+        btnExcluir.setBackground(new java.awt.Color(255, 153, 0));
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(0, 0, 0));
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(this::btnExcluirActionPerformed);
+        Dados.add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 100, -1));
+
+        btnLimpar.setBackground(new java.awt.Color(0, 0, 255));
+        btnLimpar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(this::btnLimparActionPerformed);
+        Dados.add(btnLimpar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 100, -1));
+
+        tableCadastro.setBackground(new java.awt.Color(255, 255, 255));
+        tableCadastro.setForeground(new java.awt.Color(0, 0, 0));
+        tableCadastro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nome", "Categoria", "Preço", "Estoque"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tableCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableCadastroMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableCadastro);
 
         javax.swing.GroupLayout PrincipalLayout = new javax.swing.GroupLayout(Principal);
         Principal.setLayout(PrincipalLayout);
@@ -74,21 +225,155 @@ public class TelaCadastro extends javax.swing.JFrame {
             .addGroup(PrincipalLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(Dados, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(428, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
+                .addContainerGap())
         );
         PrincipalLayout.setVerticalGroup(
             PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PrincipalLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(Dados, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Dados, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(100, 100, 100))
         );
 
-        getContentPane().add(Principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 690, 370));
+        getContentPane().add(Principal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 900, 370));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tableCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableCadastroMouseClicked
+         //Todo add your handling code here: 
+
+        int linha = tableCadastro.getSelectedRow();
+
+        if (linha == -1) {
+            return;
+        }
+
+        int codigo = Integer.parseInt(
+                tableCadastro.getValueAt(linha, 0).toString()
+        );
+
+        txtID.setText(String.format("%03d", codigo));
+
+        txtNome.setText(
+                String.valueOf(tableCadastro.getValueAt(linha, 1))
+        );
+
+        txtCategoria.setText(
+                String.valueOf(tableCadastro.getValueAt(linha, 2))
+        );
+        
+        double codPreco = Double.parseDouble(
+                tableCadastro.getValueAt(linha, 3).toString()
+        );
+
+        txtPreco.setText(String.format("%.2f", codPreco));
+        
+        int codEstoque = Integer.parseInt(
+                tableCadastro.getValueAt(linha, 0).toString()
+        );
+
+        txtEstoque.setText(String.format("%03d", codEstoque));
+    }//GEN-LAST:event_tableCadastroMouseClicked
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        // 1: ler o que o usuario digitou (chega como texto)
+        String nome = txtNome.getText().trim();
+        String categoria = txtCategoria.getText().trim();
+        
+        String textoPreco = txtPreco.getText().replace(",", "."); // replace troca a virgula por ponto para por exempro 25,60 ser 25.60
+        double preco = Double.parseDouble(textoPreco);// convertendo o texto em numero decimal (DOUBLE)
+        
+        String textoEstoque = txtEstoque.getText().trim();
+        int estoque = Integer.parseInt(textoEstoque);// convertendo o texto em numero inteiro
+        
+        CadastroModel cadastro = new CadastroModel();
+        cadastro.inserir(nome, categoria, preco, estoque);
+        JOptionPane.showMessageDialog(
+                null,
+                "Cadastro realizado com sucesso!",
+                "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE
+        );
+        //Chama para limpar campos
+        LimparCampos();
+        carregarTabela();
+
+        //////// metodo carregar feito
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+
+        //Pegando as informações da Tela
+        String nome = txtNome.getText().trim();
+        String categoria = txtCategoria.getText().trim();
+        
+        String textoPreco = txtPreco.getText().replace(",", "."); // replace troca a virgula por ponto para por exempro 25,60 ser 25.60
+        double preco = Double.parseDouble(textoPreco);// convertendo o texto em numero decimal (DOUBLE)
+        
+        String textoEstoque = txtEstoque.getText().trim();
+        int estoque = Integer.parseInt(textoEstoque);// convertendo o texto em numero inteiro
+
+        int id = Integer.parseInt(txtID.getText().trim());
+        
+        //Criando o Objeto para ter acesso aos métodos CRUD e atributos
+        CadastroModel cadastro = new CadastroModel();
+        //Chamando o método atualizar
+        String resposta = cadastro.atualizar(id, nome, categoria, preco, estoque);
+        //mostra uma mensagem na Tela que foi gravado
+        JOptionPane.showMessageDialog(
+                null,
+                resposta, "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE);
+        //Limpar as caixas de texto
+        LimparCampos();
+        //Carregando a tabela ao iniciar
+        carregarTabela();
+
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        if (txtID.getText().equals("")) {
+            //mostra uma msg na Tela que foi gravado
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Favor Selecionar um Registro ",
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+        } else {
+            int id = Integer.parseInt(txtID.getText().trim());
+
+            //Criando o Objeto para ter acesso aos métodos CRUD e atributos
+            CadastroModel cadastro = new CadastroModel();
+            String resposta = cadastro.excluir(id);
+
+            //mostra uma msg na Tela que foi gravado
+            JOptionPane.showMessageDialog(
+                    null,
+                    resposta,
+                    "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            //Limpar as caixas de Texto
+            LimparCampos();
+
+            //Carregando a tabela ao iniciar
+            carregarTabela();
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        LimparCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,6 +406,23 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JPanel Dados;
     private javax.swing.JPanel Principal;
     private javax.swing.JLabel Titulo;
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLimpar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblEstoque;
+    private javax.swing.JLabel lblEstoqueCabecalho;
     private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblPreco;
+    private javax.swing.JTable tableCadastro;
+    private javax.swing.JTextField txtCategoria;
+    private javax.swing.JTextField txtEstoque;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }
